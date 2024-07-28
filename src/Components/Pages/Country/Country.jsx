@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Country = ({ country }) => {
 
     const { name, flags, population, region, maps, openStreetMaps, capital, area, borders } = country || {};
+    const [visited, setVisited] = useState(false);
 
+    const handleVisted = () => {
+        setVisited(!visited);
+    }
 
     return (
         <div className='max-w-sm mx-auto text-center bg-white shadow-lg rounded-lg overflow-hidden'>
@@ -26,6 +30,11 @@ const Country = ({ country }) => {
                         {maps && <a href={maps.googleMaps} target="_blank" rel='noopner noreferrer' className='text-blue-500 hover:underline'>View on Google Maps</a>}
                     </div>
                 </div>
+
+                <div>
+                    <button onClick={handleVisted} className={`btn ${visited ? "btn-primary" : "btn-outline-primary"} btn-sm w-full my-3 text-black capitalize`}>{visited ? "Visited" : "Not Visited"}</button>
+                </div>
+
             </div>
 
         </div>
