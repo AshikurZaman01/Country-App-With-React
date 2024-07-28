@@ -19,10 +19,8 @@ const Countris = () => {
         e.preventDefault();
         setSearchValue(e.target.value);
     }
-
     const filteredCountries = countries.filter((country) => country.name.common.toLowerCase().includes(searchValue.toLowerCase()));
 
-    console.log("filter Data :", filteredCountries);
 
     return (
         <div className="container mx-auto p-4">
