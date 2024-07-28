@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Country from './Country';
 import handleVisitedCountry from '../Utilities/handleVisitedCountry';
+import VisitedCountry from './VisitedCountry';
+import HandleCountries from '../Utilities/HandleCountries';
 
 const Countris = () => {
 
@@ -14,8 +16,6 @@ const Countris = () => {
             .catch(err => console.log(err))
     }, [])
 
-
-
     return (
         <div className="container mx-auto p-4">
 
@@ -24,11 +24,10 @@ const Countris = () => {
                 <h4 className='tex2xl font-bold'>Total Countries : {countries.length}</h4>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {countries.map((country) => (
-                    <Country key={country.cca3} country={country} handleVisitedCountry={() => handleVisitedCountry(country, visitedCountry, setVisitedCountry)} />
-                ))}
-            </div>
+            <VisitedCountry visitedCountry={visitedCountry}></VisitedCountry>
+
+            <HandleCountries countries={countries} visitedCountry={visitedCountry} setVisitedCountry={setVisitedCountry}></HandleCountries>
+
         </div>
     );
 }
