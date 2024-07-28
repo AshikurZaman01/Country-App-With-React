@@ -6,7 +6,7 @@ const VisitedCountry = ({ visitedCountry }) => {
                 <div>
                     {
                         visitedCountry && visitedCountry.length > 0 ?
-                            <h1 className='text-center mb-4 text-green-600 font-extrabold'>Visited Countries</h1>
+                            <h1 className='text-center mb-4 text-green-600 font-extrabold'>Visited Countries : {visitedCountry.length}</h1>
                             : <h1 className='text-center mb-4 text-red-600 font-extrabold'>No Visited Countries</h1>
                     }
                 </div>

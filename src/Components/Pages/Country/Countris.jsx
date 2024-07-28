@@ -3,6 +3,7 @@ import Country from './Country';
 import handleVisitedCountry from '../Utilities/handleVisitedCountry';
 import VisitedCountry from './VisitedCountry';
 import HandleCountries from '../Utilities/HandleCountries';
+import CountryHeader from './CountryHeader';
 
 const Countris = () => {
 
@@ -19,10 +20,9 @@ const Countris = () => {
     return (
         <div className="container mx-auto p-4">
 
-            <div className='text-center mb-4'>
-                <h3 className='text-3xl font-bold pb-3'>Countries</h3>
-                <h4 className='tex2xl font-bold'>Total Countries : {countries.length}</h4>
-            </div>
+            <CountryHeader countries={countries}></CountryHeader>
+
+
 
             <VisitedCountry visitedCountry={visitedCountry}></VisitedCountry>
 
