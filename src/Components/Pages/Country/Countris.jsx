@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import Country from './Country';
+import handleVisitedCountry from '../Utilities/handleVisitedCountry';
 
 const Countris = () => {
+
     const [countries, setCountries] = useState([]);
+    const [visitedCountry, setVisitedCountry] = useState([]);
 
     useEffect(() => {
         fetch('https://restcountries.com/v3.1/all')
@@ -10,6 +13,8 @@ const Countris = () => {
             .then(data => setCountries(data))
             .catch(err => console.log(err))
     }, [])
+
+
 
     return (
         <div className="container mx-auto p-4">
@@ -21,7 +26,7 @@ const Countris = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {countries.map((country) => (
-                    <Country key={country.cca3} country={country} />
+                    <Country key={country.cca3} country={country} handleVisitedCountry={() => handleVisitedCountry(country, visitedCountry, setVisitedCountry)} />
                 ))}
             </div>
         </div>
