@@ -4,10 +4,10 @@ const Country = ({ country }) => {
 
     const { name, flags, population, region, maps, openStreetMaps, capital, area, borders } = country || {};
 
-    console.log(borders);
 
     return (
-        <div className=''>
+        <div className='max-w-sm mx-auto text-center bg-white shadow-lg rounded-lg overflow-hidden'>
+
             <div className='flex items-center justify-center p-4 bg-gray-100'>
                 <img src={flags.svg} alt={`${name.common} flag`} className='w-32 h-16' />
             </div>
@@ -21,6 +21,11 @@ const Country = ({ country }) => {
                 {
                     borders && borders ? <p className='text-gray-700'><strong>Borders : {borders.join(', ')} </strong></p> : <p><strong>Border : N/A</strong></p>
                 }
+                <div className='mt-4'>
+                    <div>
+                        {maps && <a href={maps.googleMaps} target="_blank" rel='noopner noreferrer' className='text-blue-500 hover:underline'>View on Google Maps</a>}
+                    </div>
+                </div>
             </div>
 
         </div>
