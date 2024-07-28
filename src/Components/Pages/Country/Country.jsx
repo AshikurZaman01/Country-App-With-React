@@ -8,8 +8,8 @@ const Country = ({ country }) => {
 
     return (
         <div>
-            <div>
-                <img src={flags.svg} alt="" />
+            <div className='flex items-center justify-center p-4 bg-gray-100'>
+                <img src={flags.svg} alt={`${name.common} flag`} className='w-32 h-16' />
             </div>
         </div>
     );
