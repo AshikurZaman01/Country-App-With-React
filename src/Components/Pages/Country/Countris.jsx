@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Country from './Country';
 import handleVisitedCountry from '../Utilities/handleVisitedCountry';
 import VisitedCountry from './VisitedCountry';
@@ -13,11 +13,18 @@ const Countris = () => {
     const [visitedCountry, setVisitedCountry] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
+    // pagination state
+    const [currentPage, setCurrentPage] = useState(1);
+    const countryPerPage = 8;
+
+
+
     getCountryData(setCountries);
 
     const handleSearch = (e) => {
         e.preventDefault();
         setSearchValue(e.target.value);
+        setCurrentPage(1);
     }
     const filteredCountries = countries.filter((country) => country.name.common.toLowerCase().includes(searchValue.toLowerCase()));
 
@@ -31,6 +38,8 @@ const Countris = () => {
 
             <VisitedCountry visitedCountry={visitedCountry}></VisitedCountry>
             <HandleCountries countries={filteredCountries} visitedCountry={visitedCountry} setVisitedCountry={setVisitedCountry}></HandleCountries>
+
+
 
         </div>
     );
