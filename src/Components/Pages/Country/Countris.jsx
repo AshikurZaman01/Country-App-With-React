@@ -17,6 +17,12 @@ const Countris = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const countryPerPage = 8;
 
+    //number indexes
+    const indexOfLastCountry = currentPage * countryPerPage;
+    const indexOfFirstCountry = indexOfLastCountry - countryPerPage;
+    const currentCountries = countries.slice(indexOfFirstCountry, indexOfLastCountry);
+
+
 
 
     getCountryData(setCountries);
