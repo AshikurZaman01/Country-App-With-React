@@ -4,8 +4,6 @@ import HandleCountries from '../Utilities/HandleCountries';
 import CountryHeader from './CountryHeader';
 import getCountryData from '../Utilities/getCountryData';
 import SearchCountries from '../SearchCountry/SearchCountries';
-import Pagination from '../../Pagination/Pagination';
-import { getPageNumbersToShow } from '../../Pagination/handlePagination';
 
 const Countris = () => {
 
@@ -42,7 +40,21 @@ const Countris = () => {
     };
 
 
-    getPageNumbersToShow(currentPage, totalNumberOfPages);
+    //	Page Number Range Calculation
+    const getPageNumbersToShow = () => {
+        const totalNumbers = 5;
+        const half = Math.floor(totalNumbers / 2);
+        let start = Math.max(1, currentPage - half);
+        let end = Math.min(totalNumberOfPages, currentPage + half);
+
+        if (currentPage <= half) {
+            end = Math.min(totalNumbers, totalNumberOfPages);
+        }
+        if (currentPage + half >= totalNumberOfPages) {
+            start = Math.max(totalNumberOfPages - totalNumbers + 1, 1);
+        }
+        return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    };
 
 
 
@@ -66,10 +78,43 @@ const Countris = () => {
             <VisitedCountry visitedCountry={visitedCountry}></VisitedCountry>
             <HandleCountries currentCountries={currentCountries} countries={filteredCountries} visitedCountry={visitedCountry} setVisitedCountry={setVisitedCountry}></HandleCountries>
 
-            <Pagination currentPage={currentPage} totalNumberOfPages={totalNumberOfPages} handlePrevious={handlePrevious} handleNext={handleNext} getPageNumbersToShow={getPageNumbersToShow} paginate={paginate}></Pagination>
+            <div className="mt-4">
+                <nav className="flex justify-center">
+                    <ul className="flex flex-wrap justify-center space-x-2">
+                        <li>
+                            <button
+                                onClick={handlePrevious}
+                                className={`px-3 py-2 border bg-white text-gray-700 border-gray-300 hover:bg-blue-100 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                disabled={currentPage === 1}
+                            >
+                                Previous
+                            </button>
+                        </li>
+                        {getPageNumbersToShow().map((number) => (
+                            <li key={number}>
+                                <button
+                                    onClick={() => paginate(number)}
+                                    className={`px-3 py-2 border ${currentPage === number ? 'bg-blue-500 text-white' : 'bg-white text-gray-700'} border-gray-300 hover:bg-blue-100`}
+                                >
+                                    {number}
+                                </button>
+                            </li>
+                        ))}
+                        <li>
+                            <button
+                                onClick={handleNext}
+                                className={`px-3 py-2 border bg-white text-gray-700 border-gray-300 hover:bg-blue-100 ${currentPage === totalNumberOfPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                disabled={currentPage === totalNumberOfPages}
+                            >
+                                Next
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
 
-        </div >
+        </div>
     );
 }
 
