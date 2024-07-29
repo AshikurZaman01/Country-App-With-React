@@ -2,11 +2,11 @@ import React from 'react';
 import Country from '../Country/Country';
 import handleVisitedCountry from './handleVisitedCountry';
 
-const HandleCountries = ({ countries, visitedCountry, setVisitedCountry }) => {
+const HandleCountries = ({ currentCountries, countries, visitedCountry, setVisitedCountry }) => {
     return (
         <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {countries.map((country) => (
+                {currentCountries.map((country) => (
                     <Country key={country.cca3} country={country} handleVisitedCountry={() => handleVisitedCountry(country, visitedCountry, setVisitedCountry)} />
                 ))}
             </div>
